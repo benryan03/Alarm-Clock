@@ -37,5 +37,11 @@ namespace Clock
             Form1.currentTime = currentTime.AddSeconds(1);
             label2.Text = currentTime.ToString();
         }
+
+        private void setAlarm_Click(object sender, EventArgs e)
+        {
+            Form2 secondForm = new Form2();
+            secondForm.Show();
+        }
     }
 }
