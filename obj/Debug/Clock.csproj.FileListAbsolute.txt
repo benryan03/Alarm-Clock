@@ -9,3 +9,14 @@ C:\Users\Ben\Desktop\C#\Clock\Clock\Clock\obj\Debug\Clock.csproj.CoreCompileInpu
 C:\Users\Ben\Desktop\C#\Clock\Clock\Clock\obj\Debug\Clock.exe
 C:\Users\Ben\Desktop\C#\Clock\Clock\Clock\obj\Debug\Clock.pdb
 C:\Users\Ben\Desktop\C#\Clock\Clock\Clock\obj\Debug\Clock.Form2.resources
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\bin\Debug\Clock.exe.config
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\bin\Debug\Clock.exe
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\bin\Debug\Clock.pdb
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.csprojAssemblyReference.cache
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.Form1.resources
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.Form2.resources
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.Properties.Resources.resources
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.csproj.GenerateResource.cache
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.csproj.CoreCompileInputs.cache
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.exe
+C:\Users\Ben\Desktop\C#\Clock_Clone\Clock\obj\Debug\Clock.pdb

@@ -15,21 +15,11 @@ namespace Clock
 
         public static DateTime currentTime = DateTime.Now;
 
-        public Form1()
+        public Form1(string name = "")
         {
             InitializeComponent();
             label2.Text = currentTime.ToString();
             timer1.Start();
-
-        }
-
-        public class dateTimeMethod
-        {
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -40,8 +30,14 @@ namespace Clock
 
         private void setAlarm_Click(object sender, EventArgs e)
         {
-            Form2 secondForm = new Form2();
-            secondForm.Show();
+            Form2 f = new Form2();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                string alarmTime = f.SetHour.ToString() + f.SetMinute.ToString() + f.SetHalf.ToString();
+                label3.Text = f.Name + alarmTime;
+
+
+            }
         }
     }
 }
