@@ -34,6 +34,7 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.save = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -132,7 +133,7 @@
             "57",
             "58",
             "59"});
-            this.comboBox2.Location = new System.Drawing.Point(88, 67);
+            this.comboBox2.Location = new System.Drawing.Point(108, 67);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(60, 28);
             this.comboBox2.TabIndex = 2;
@@ -144,7 +145,7 @@
             this.comboBox3.Items.AddRange(new object[] {
             "AM",
             "PM"});
-            this.comboBox3.Location = new System.Drawing.Point(154, 67);
+            this.comboBox3.Location = new System.Drawing.Point(200, 68);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(60, 28);
             this.comboBox3.TabIndex = 3;
@@ -152,16 +153,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(22, 101);
+            this.textBox1.Location = new System.Drawing.Point(22, 116);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 26);
+            this.textBox1.Size = new System.Drawing.Size(238, 26);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "Name";
             // 
             // save
             // 
             this.save.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.save.Location = new System.Drawing.Point(22, 133);
+            this.save.Location = new System.Drawing.Point(22, 167);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 40);
             this.save.TabIndex = 5;
@@ -169,11 +170,22 @@
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(87, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(18, 25);
+            this.label2.TabIndex = 6;
+            this.label2.Text = ":";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.save);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox3);
@@ -195,5 +207,6 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button save;
+        private System.Windows.Forms.Label label2;
     }
 }

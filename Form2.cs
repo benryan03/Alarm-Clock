@@ -51,5 +51,7 @@ namespace Clock
             SetHalf = comboBox3.Text;
             Name = textBox1.Text;
         }
+
+
     }
 }
