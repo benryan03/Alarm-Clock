@@ -90,6 +90,7 @@ namespace Clock
             label3.Text = "";
             label5.Text = "";
             button2.Visible = false;
+            alarm1 = DateTime.MaxValue;
         }
     }
 }
