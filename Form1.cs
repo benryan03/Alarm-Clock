@@ -12,16 +12,26 @@ namespace Clock
 {
     public partial class Form1 : Form
     {
+        
+
+
 
         public static DateTime currentTime = DateTime.Now;
         public DateTime alarm1 = DateTime.MaxValue;
         public bool alarm1Expired = false;
+        private string alarm1Name;
 
         public Form1(string name = "")
         {
             InitializeComponent();
             label2.Text = currentTime.ToString();
             timer1.Start();
+
+            //Hide debug elements
+            label3.Text = "";
+            label5.Text = "";
+            button2.Visible = false;
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -32,7 +42,7 @@ namespace Clock
             if ((DateTime.Compare(alarm1, currentTime) < 0) & alarm1Expired == false)
             {
                 alarm1Expired = true;
-                MessageBox.Show("Alarm!");
+                MessageBox.Show(alarm1Name);
             }
 
         }
@@ -45,6 +55,7 @@ namespace Clock
                 //Get and format the alarm time that the user set
                 int hour = 0;
                 int minute = int.Parse(f.SetMinute);
+                alarm1Name = f.Name;
                 if (f.SetHalf == "AM")
                 {
                     hour = int.Parse(f.SetHour);
@@ -69,8 +80,16 @@ namespace Clock
                 {
                     label3.Text = f.Name;
                     label5.Text = alarm1.ToString();
+                    button2.Visible = true;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            label3.Text = "";
+            label5.Text = "";
+            button2.Visible = false;
         }
     }
 }
