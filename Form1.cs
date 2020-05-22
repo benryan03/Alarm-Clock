@@ -67,7 +67,8 @@ namespace Clock
                 }
                 else
                 {
-                    label3.Text = f.Name + " " + alarm1;
+                    label3.Text = f.Name;
+                    label5.Text = alarm1.ToString();
                 }
             }
         }
