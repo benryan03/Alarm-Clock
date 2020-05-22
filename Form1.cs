@@ -14,6 +14,8 @@ namespace Clock
     {
 
         public static DateTime currentTime = DateTime.Now;
+        public DateTime alarm1 = DateTime.MaxValue;
+        public bool alarm1Expired = false;
 
         public Form1(string name = "")
         {
@@ -26,6 +28,13 @@ namespace Clock
         {
             Form1.currentTime = currentTime.AddSeconds(1);
             label2.Text = currentTime.ToString();
+
+            if ((DateTime.Compare(alarm1, currentTime) < 0) & alarm1Expired == false)
+            {
+                alarm1Expired = true;
+                MessageBox.Show("Alarm!");
+            }
+
         }
 
         private void setAlarm_Click(object sender, EventArgs e)
@@ -49,25 +58,17 @@ namespace Clock
                     hour = int.Parse(f.SetHour) + 12;
                 }
 
-
-
-
-                DateTime alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
+                alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
                 
                 if ( DateTime.Compare(alarm1, currentTime) < 0)
                 {
                     label3.Text = "alarm cannot be in the past";
+                    alarm1 = DateTime.MaxValue;
                 }
                 else
                 {
-                    //string alarmTime = f.SetHour.ToString() + f.SetMinute.ToString() + f.SetHalf.ToString();
                     label3.Text = f.Name + " " + alarm1;
-
                 }
-
-                //label3.Text = f.Name + " " + alarm1;
-                //label3.Text = f.SetHalf;
-
             }
         }
     }
