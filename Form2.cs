@@ -78,7 +78,5 @@ namespace Clock
                 this.DialogResult = DialogResult.None;
             }
         }
-
-
     }
 }
