@@ -12,6 +12,9 @@ namespace Clock
 {
     public partial class Form2 : Form
     {
+        public static DateTime currentTime = DateTime.Now;
+        public DateTime alarm1temp = DateTime.MaxValue;
+
         private string setHour;
         public string SetHour
         {
@@ -50,6 +53,14 @@ namespace Clock
             SetMinute = comboBox2.Text;
             SetHalf = comboBox3.Text;
             Name = textBox1.Text;
+
+
+            alarm1temp = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, int.Parse(comboBox1.Text), int.Parse(comboBox2.Text), 0);
+            if (DateTime.Compare(alarm1temp, currentTime) < 0)
+            {
+                MessageBox.Show("Alarm cannot be in the past");
+                this.DialogResult = DialogResult.None;
+            }
         }
 
 
