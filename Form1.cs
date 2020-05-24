@@ -70,20 +70,10 @@ namespace Clock
                 alarmButtons[y].Text = "Delete";
                 alarmButtons[y].Top = 50;
                 //alarmButtons[y].Click += new EventHandler(AlarmButtons_Click(y));
-                //alarmButtons[y].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender, EventArgs, y); };
-
-
             }
-
-
-
-
-
-
         }
 
-
-        //Tick occurs once persecond
+        //Tick occurs once per second
         //Updates main clock display and checks if an alarm should go off
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -99,7 +89,6 @@ namespace Clock
 
         //Trigger when "Set Alarm" is clicked
         //But do nothing until the Set Alarm window is closed
-
         int newAlarmsSet = 0;
         private void setAlarm_Click(object sender, EventArgs e)
         {
@@ -116,16 +105,12 @@ namespace Clock
 
                 alarmPanels[newAlarmsSet].Visible = true;
                 alarmPanels[newAlarmsSet].Top = panelTop;
-
-                newAlarmsSet++;
                 panelTop = panelTop + 100;
 
+                alarmButtons[newAlarmsSet].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, newAlarmsSet); };
 
-
-
+                newAlarmsSet++;
             }
-
-
         }
 
         private void AlarmButtons_Click(object sender, EventArgs e, int test)
