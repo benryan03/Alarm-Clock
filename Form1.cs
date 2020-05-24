@@ -18,20 +18,16 @@ namespace Clock
 
         public static DateTime currentTime = DateTime.Now;
         public DateTime alarm1 = DateTime.MaxValue;
+
         public bool alarm1Expired = false;
         private string alarm1Name;
+        public int panelTop = 100;
 
         public Form1(string name = "")
         {
             InitializeComponent();
             label2.Text = currentTime.ToString();
             timer1.Start();
-
-            //Hide debug elements
-            label3.Text = "";
-            label5.Text = "";
-            button2.Visible = false;
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -50,12 +46,17 @@ namespace Clock
         private void setAlarm_Click(object sender, EventArgs e)
         {
             Form2 f = new Form2();
+            
+            //If a new alarm was set on Form2
             if (f.ShowDialog() == DialogResult.OK)
             {
                 //Get and format the alarm time that the user set
-                int hour = 0;
+                //int hour = 0;
+                int hour = int.Parse(f.SetHour);
                 int minute = int.Parse(f.SetMinute);
                 alarm1Name = f.Name;
+
+                /*
                 if (f.SetHalf == "AM")
                 {
                     hour = int.Parse(f.SetHour);
@@ -68,29 +69,52 @@ namespace Clock
                 {
                     hour = int.Parse(f.SetHour) + 12;
                 }
+                */
 
                 alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
-                
-                if ( DateTime.Compare(alarm1, currentTime) < 0)
-                {
-                    label3.Text = "alarm cannot be in the past";
-                    alarm1 = DateTime.MaxValue;
-                }
-                else
-                {
-                    label3.Text = f.Name;
-                    label5.Text = alarm1.ToString();
-                    button2.Visible = true;
-                }
-            }
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            label3.Text = "";
-            label5.Text = "";
-            button2.Visible = false;
-            alarm1 = DateTime.MaxValue;
+                panelTop = panelTop + 100;
+
+                Panel alarmPanel1 = new Panel();
+                this.Controls.Add(alarmPanel1);
+                //alarmPanel1.BackColor = Color.White;
+                alarmPanel1.Top = panelTop;
+                alarmPanel1.Left = 15;
+                alarmPanel1.Width = 380;
+                alarmPanel1.Height = 100;
+
+                Label alarm1Title = new Label();
+                alarmPanel1.Controls.Add(alarm1Title);
+                alarm1Title.Text = f.Name;
+                alarm1Title.Font = new Font("Microsoft Sans Serif", 18);
+                alarm1Title.Top = 0;
+
+
+                Label alarm1Time = new Label();
+                alarmPanel1.Controls.Add(alarm1Time);
+                alarm1Time.Text = alarm1.ToString();
+                alarm1Time.Font = new Font("Microsoft Sans Serif", 12);
+                alarm1Time.Top = 25;
+                alarm1Time.Width = 380;
+
+
+                Button alarm1Delete = new Button();
+                alarmPanel1.Controls.Add(alarm1Delete);
+                alarm1Delete.Text = "Delete";
+                //alarm1Time.Font = new Font("Microsoft Sans Serif", 12);
+                alarm1Delete.Top = 50;
+
+
+
+
+
+                /*
+                //Update display with new alarm
+                label3.Text = f.Name;
+                label5.Text = alarm1.ToString();
+                delete.Visible = true;
+                */
+            }
         }
     }
 }

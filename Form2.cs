@@ -12,7 +12,7 @@ namespace Clock
 {
     public partial class Form2 : Form
     {
-        public DateTime alarm1 = DateTime.MaxValue;
+        public DateTime alarm1form2 = DateTime.MaxValue;
 
         private string setHour;
         public string SetHour
@@ -71,11 +71,15 @@ namespace Clock
                 hour = int.Parse(SetHour) + 12;
             }
 
-            alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
-            if (alarm1 < currentTime)
+            SetHour = hour.ToString();
+            //SetMinute = 
+
+            alarm1form2 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
+            if (alarm1form2 < currentTime)
             {
                 MessageBox.Show("Alarm cannot be in the past");
                 this.DialogResult = DialogResult.None;
+                alarm1form2 = DateTime.MaxValue;
             }
         }
     }
