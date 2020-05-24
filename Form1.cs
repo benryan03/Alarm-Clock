@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,21 +19,72 @@ namespace Clock
 
         public bool alarm1Expired = false;
         private string alarm1Name;
-        public int panelTop = 100;
+        public int panelTop = 200;
 
-        Panel alarmPanel1 = new Panel();
-        Label alarm1Title = new Label();
-        Label alarm1Time = new Label();
-        Button alarm1Delete = new Button();
+        //Up to 10 alarms can be saved
+        static int x = 10;
 
+        Panel[] alarmPanels = new Panel[x];
+        Label[] alarmTitles = new Label[x];
+        Label[] alarmTimes = new Label[x];
+        Button[] alarmButtons = new Button[x];
 
         public Form1(string name = "")
         {
             InitializeComponent();
             label2.Text = currentTime.ToString();
             timer1.Start();
+
+            //Populate stuff for saved alarms display
+            for (int y = 0; y < x; y++)
+            {
+                alarmPanels[y] = new Panel();
+                alarmTitles[y] = new Label();
+                alarmTimes[y] = new Label();
+                alarmButtons[y] = new Button();
+            }
+
+            for (int y = 0; y < x; y++)
+            {
+                Controls.Add(alarmPanels[y]);
+                alarmPanels[y].BackColor = Color.White;  //Debug
+                //alarmPanels[y].Top = panelTop;
+                alarmPanels[y].Left = 15;
+                alarmPanels[y].Width = 380;
+                alarmPanels[y].Height = 100;
+                alarmPanels[y].Visible = false;
+
+                alarmPanels[y].Controls.Add(alarmTitles[y]);
+                //alarmTitles[y].Text = f.Name;
+                alarmTitles[y].Font = new Font("Microsoft Sans Serif", 18);
+                alarmTitles[y].Top = 0;
+
+                alarmPanels[y].Controls.Add(alarmTimes[y]);
+                //alarmTimes[y].Text = alarm1.ToString();
+                alarmTimes[y].Text = y.ToString();
+                alarmTimes[y].Font = new Font("Microsoft Sans Serif", 12);
+                alarmTimes[y].Top = 25;
+                alarmTimes[y].Width = 380;
+
+                alarmPanels[y].Controls.Add(alarmButtons[y]);
+                alarmButtons[y].Text = "Delete";
+                alarmButtons[y].Top = 50;
+                //alarmButtons[y].Click += new EventHandler(AlarmButtons_Click(y));
+                //alarmButtons[y].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender, EventArgs, y); };
+
+
+            }
+
+
+
+
+
+
         }
 
+
+        //Tick occurs once persecond
+        //Updates main clock display and checks if an alarm should go off
         private void timer1_Tick(object sender, EventArgs e)
         {
             Form1.currentTime = currentTime.AddSeconds(1);
@@ -44,6 +97,10 @@ namespace Clock
             }
         }
 
+        //Trigger when "Set Alarm" is clicked
+        //But do nothing until the Set Alarm window is closed
+
+        int newAlarmsSet = 0;
         private void setAlarm_Click(object sender, EventArgs e)
         {
             Form2 f = new Form2();
@@ -57,41 +114,24 @@ namespace Clock
                 alarm1Name = f.Name;
                 alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
 
+                alarmPanels[newAlarmsSet].Visible = true;
+                alarmPanels[newAlarmsSet].Top = panelTop;
+
+                newAlarmsSet++;
                 panelTop = panelTop + 100;
 
-                //Display the saved alarms
 
-                this.Controls.Add(alarmPanel1);
-                //alarmPanel1.BackColor = Color.White;  //Debug
-                alarmPanel1.Top = panelTop;
-                alarmPanel1.Left = 15;
-                alarmPanel1.Width = 380;
-                alarmPanel1.Height = 100;
 
-                alarmPanel1.Controls.Add(alarm1Title);
-                alarm1Title.Text = f.Name;
-                alarm1Title.Font = new Font("Microsoft Sans Serif", 18);
-                alarm1Title.Top = 0;
 
-                alarmPanel1.Controls.Add(alarm1Time);
-                alarm1Time.Text = alarm1.ToString();
-                alarm1Time.Font = new Font("Microsoft Sans Serif", 12);
-                alarm1Time.Top = 25;
-                alarm1Time.Width = 380;
-
-                alarmPanel1.Controls.Add(alarm1Delete);
-                alarm1Delete.Text = "Delete";
-                alarm1Delete.Top = 50;
-                alarm1Delete.Click += new EventHandler(alarm1Delete_Click);
             }
+
+
         }
 
-        private void alarm1Delete_Click(object sender, EventArgs e)
+        private void AlarmButtons_Click(object sender, EventArgs e, int test)
         {
-            alarmPanel1.Controls.Remove(alarmPanel1);
-            alarmPanel1.Controls.Remove(alarm1Title);
-            alarmPanel1.Controls.Remove(alarm1Time);
-            alarmPanel1.Controls.Remove(alarm1Delete);
+            MessageBox.Show(test.ToString());
+            //return 1;
         }
     }
 }

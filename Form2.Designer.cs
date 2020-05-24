@@ -51,6 +51,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
+            "11",
             "12",
             "1",
             "2",
@@ -61,13 +62,13 @@
             "7",
             "8",
             "9",
-            "0",
+            "10",
             "11"});
             this.comboBox1.Location = new System.Drawing.Point(22, 67);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(60, 28);
             this.comboBox1.TabIndex = 1;
-            this.comboBox1.Text = "12";
+            this.comboBox1.Text = "11";
             // 
             // comboBox2
             // 
@@ -143,13 +144,13 @@
             // 
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
-            "AM",
-            "PM"});
+            "PM",
+            "AM"});
             this.comboBox3.Location = new System.Drawing.Point(200, 68);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(60, 28);
             this.comboBox3.TabIndex = 3;
-            this.comboBox3.Text = "AM";
+            this.comboBox3.Text = "PM";
             // 
             // textBox1
             // 
