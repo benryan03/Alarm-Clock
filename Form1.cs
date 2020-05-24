@@ -12,10 +12,6 @@ namespace Clock
 {
     public partial class Form1 : Form
     {
-        
-
-
-
         public static DateTime currentTime = DateTime.Now;
         public DateTime alarm1 = DateTime.MaxValue;
 
@@ -40,7 +36,6 @@ namespace Clock
                 alarm1Expired = true;
                 MessageBox.Show(alarm1Name);
             }
-
         }
 
         private void setAlarm_Click(object sender, EventArgs e)
@@ -51,33 +46,18 @@ namespace Clock
             if (f.ShowDialog() == DialogResult.OK)
             {
                 //Get and format the alarm time that the user set
-                //int hour = 0;
                 int hour = int.Parse(f.SetHour);
                 int minute = int.Parse(f.SetMinute);
                 alarm1Name = f.Name;
-
-                /*
-                if (f.SetHalf == "AM")
-                {
-                    hour = int.Parse(f.SetHour);
-                    if (f.SetHour == "12")
-                    {
-                        hour = 0;
-                    }
-                }
-                else if (f.SetHalf == "PM")
-                {
-                    hour = int.Parse(f.SetHour) + 12;
-                }
-                */
-
                 alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
 
                 panelTop = panelTop + 100;
 
+                //Display the saved alarms
+
                 Panel alarmPanel1 = new Panel();
                 this.Controls.Add(alarmPanel1);
-                //alarmPanel1.BackColor = Color.White;
+                //alarmPanel1.BackColor = Color.White;  //Debug
                 alarmPanel1.Top = panelTop;
                 alarmPanel1.Left = 15;
                 alarmPanel1.Width = 380;
@@ -89,7 +69,6 @@ namespace Clock
                 alarm1Title.Font = new Font("Microsoft Sans Serif", 18);
                 alarm1Title.Top = 0;
 
-
                 Label alarm1Time = new Label();
                 alarmPanel1.Controls.Add(alarm1Time);
                 alarm1Time.Text = alarm1.ToString();
@@ -97,23 +76,10 @@ namespace Clock
                 alarm1Time.Top = 25;
                 alarm1Time.Width = 380;
 
-
                 Button alarm1Delete = new Button();
                 alarmPanel1.Controls.Add(alarm1Delete);
                 alarm1Delete.Text = "Delete";
-                //alarm1Time.Font = new Font("Microsoft Sans Serif", 12);
                 alarm1Delete.Top = 50;
-
-
-
-
-
-                /*
-                //Update display with new alarm
-                label3.Text = f.Name;
-                label5.Text = alarm1.ToString();
-                delete.Visible = true;
-                */
             }
         }
     }

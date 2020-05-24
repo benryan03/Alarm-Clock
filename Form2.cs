@@ -72,7 +72,6 @@ namespace Clock
             }
 
             SetHour = hour.ToString();
-            //SetMinute = 
 
             alarm1form2 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
             if (alarm1form2 < currentTime)
