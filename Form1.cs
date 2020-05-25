@@ -47,21 +47,18 @@ namespace Clock
             for (int y = 0; y < x; y++)
             {
                 Controls.Add(alarmPanels[y]);
-                alarmPanels[y].BackColor = Color.White;  //Debug
-                //alarmPanels[y].Top = panelTop;
+                //alarmPanels[y].BackColor = Color.White;  //Debug
                 alarmPanels[y].Left = 15;
                 alarmPanels[y].Width = 380;
                 alarmPanels[y].Height = 100;
                 alarmPanels[y].Visible = false;
 
                 alarmPanels[y].Controls.Add(alarmTitles[y]);
-                //alarmTitles[y].Text = f.Name;
                 alarmTitles[y].Font = new Font("Microsoft Sans Serif", 18);
                 alarmTitles[y].Top = 0;
 
                 alarmPanels[y].Controls.Add(alarmTimes[y]);
-                //alarmTimes[y].Text = alarm1.ToString();
-                alarmTimes[y].Text = y.ToString();
+                //alarmTimes[y].Text = y.ToString(); //Debug
                 alarmTimes[y].Font = new Font("Microsoft Sans Serif", 12);
                 alarmTimes[y].Top = 25;
                 alarmTimes[y].Width = 380;
@@ -70,7 +67,6 @@ namespace Clock
                 alarmButtons[y].Text = "Delete";
                 alarmButtons[y].Top = 50;
             }
-
 
             //I tried all day to make this into a loop that works and I give up
             alarmButtons[0].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 0); };
@@ -83,7 +79,6 @@ namespace Clock
             alarmButtons[7].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 7); };
             alarmButtons[8].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 8); };
             alarmButtons[9].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 9); };
-
         }
 
         //Tick occurs once per second
@@ -116,19 +111,33 @@ namespace Clock
                 alarm1Name = f.Name;
                 alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
 
+                //Set attributes of saved alarm display
+                alarmTimes[newAlarmsSet].Text = alarm1.ToString();
+                alarmTitles[newAlarmsSet].Text = alarm1Name;
                 alarmPanels[newAlarmsSet].Visible = true;
                 alarmPanels[newAlarmsSet].Top = panelTop;
                 panelTop = panelTop + 100;
-
 
                 newAlarmsSet++;
             }
         }
 
+        //When Delete button is clicked for a saved alarm
         private void AlarmButtons_Click(object sender, EventArgs e, int z)
         {
-            MessageBox.Show(z.ToString());
+            //Stop displaying that alarm
             alarmPanels[z].Visible = false;
+
+            //Move the rest of the saved alarms up to fill the empty space
+            panelTop = 200;
+            foreach (Panel pnl in alarmPanels)
+            {
+                if (pnl.Visible == true)
+                {
+                    pnl.Top = panelTop;
+                    panelTop = panelTop + 100;
+                }
+            }
         }
     }
 }
