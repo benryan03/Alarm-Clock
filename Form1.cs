@@ -60,6 +60,7 @@ namespace Clock
                 alarmPanels[y].Controls.Add(alarmTitles[y]);
                 alarmTitles[y].Font = new Font("Microsoft Sans Serif", 18);
                 alarmTitles[y].Top = 0;
+                alarmTitles[y].Width = 380;
 
                 alarmPanels[y].Controls.Add(alarmTimes[y]);
                 alarmTimes[y].Font = new Font("Microsoft Sans Serif", 12);
