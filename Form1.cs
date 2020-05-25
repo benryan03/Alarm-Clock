@@ -15,14 +15,18 @@ namespace Clock
     public partial class Form1 : Form
     {
         public static DateTime currentTime = DateTime.Now;
-        public DateTime alarm1 = DateTime.MaxValue;
 
-        public bool alarm1Expired = false;
+        //public bool alarm1Expired = false;
         private string alarm1Name;
         public int panelTop = 200;
 
         //Up to 10 alarms can be saved
         static int x = 10;
+
+        //public DateTime alarm1 = DateTime.MaxValue;
+
+        public DateTime[] alarms = new DateTime[x];
+        public bool[] alarmExpired = new bool[x];
 
         public Panel[] alarmPanels = new Panel[x];
         public Label[] alarmTitles = new Label[x];
@@ -35,7 +39,7 @@ namespace Clock
             label2.Text = currentTime.ToString();
             timer1.Start();
 
-            //Populate stuff for saved alarms display
+            //Populate alarm display arrays
             for (int y = 0; y < x; y++)
             {
                 alarmPanels[y] = new Panel();
@@ -44,10 +48,10 @@ namespace Clock
                 alarmButtons[y] = new Button();
             }
 
+            //Populate alarm display array values with display parameters
             for (int y = 0; y < x; y++)
             {
                 Controls.Add(alarmPanels[y]);
-                //alarmPanels[y].BackColor = Color.White;  //Debug
                 alarmPanels[y].Left = 15;
                 alarmPanels[y].Width = 380;
                 alarmPanels[y].Height = 100;
@@ -58,7 +62,6 @@ namespace Clock
                 alarmTitles[y].Top = 0;
 
                 alarmPanels[y].Controls.Add(alarmTimes[y]);
-                //alarmTimes[y].Text = y.ToString(); //Debug
                 alarmTimes[y].Font = new Font("Microsoft Sans Serif", 12);
                 alarmTimes[y].Top = 25;
                 alarmTimes[y].Width = 380;
@@ -79,19 +82,51 @@ namespace Clock
             alarmButtons[7].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 7); };
             alarmButtons[8].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 8); };
             alarmButtons[9].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 9); };
+
+            
+            //Populate alarms array with default alarm values
+            for (int y = 0; y < x; y++)
+            {
+                alarms[y] = DateTime.MaxValue;
+            }
+
+            //Populate armExpired array with default values
+            for (int y = 0; y < x; y++)
+            {
+                alarmExpired[y] = false;
+            }
         }
 
         //Tick occurs once per second
         //Updates main clock display and checks if an alarm should go off
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //Update main clock display
             Form1.currentTime = currentTime.AddSeconds(1);
             label2.Text = currentTime.ToString();
 
-            if ((DateTime.Compare(alarm1, currentTime) < 0) & alarm1Expired == false)
+            for (int y = 0; y < x; y++)
             {
-                alarm1Expired = true;
-                MessageBox.Show(alarm1Name);
+                if ((DateTime.Compare(alarms[y], currentTime) < 0) & alarmExpired[y] == false)
+                {
+                    //Show notification
+                    alarmExpired[y] = true;
+                    MessageBox.Show(alarmTitles[y].Text);
+
+                    //Stop displaying that alarm
+                    alarmPanels[y].Visible = false;
+
+                    //Move the rest of the saved alarms up to fill the empty space
+                    panelTop = 200;
+                    foreach (Panel pnl in alarmPanels)
+                    {
+                        if (pnl.Visible == true)
+                        {
+                            pnl.Top = panelTop;
+                            panelTop = panelTop + 100;
+                        }
+                    }
+                }
             }
         }
 
@@ -109,10 +144,10 @@ namespace Clock
                 int hour = int.Parse(f.SetHour);
                 int minute = int.Parse(f.SetMinute);
                 alarm1Name = f.Name;
-                alarm1 = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
+                alarms[newAlarmsSet] = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, hour, minute, 0);
 
                 //Set attributes of saved alarm display
-                alarmTimes[newAlarmsSet].Text = alarm1.ToString();
+                alarmTimes[newAlarmsSet].Text = alarms[newAlarmsSet].ToString();
                 alarmTitles[newAlarmsSet].Text = alarm1Name;
                 alarmPanels[newAlarmsSet].Visible = true;
                 alarmPanels[newAlarmsSet].Top = panelTop;
