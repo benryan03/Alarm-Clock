@@ -24,10 +24,10 @@ namespace Clock
         //Up to 10 alarms can be saved
         static int x = 10;
 
-        Panel[] alarmPanels = new Panel[x];
-        Label[] alarmTitles = new Label[x];
-        Label[] alarmTimes = new Label[x];
-        Button[] alarmButtons = new Button[x];
+        public Panel[] alarmPanels = new Panel[x];
+        public Label[] alarmTitles = new Label[x];
+        public Label[] alarmTimes = new Label[x];
+        public Button[] alarmButtons = new Button[x];
 
         public Form1(string name = "")
         {
@@ -69,8 +69,21 @@ namespace Clock
                 alarmPanels[y].Controls.Add(alarmButtons[y]);
                 alarmButtons[y].Text = "Delete";
                 alarmButtons[y].Top = 50;
-                //alarmButtons[y].Click += new EventHandler(AlarmButtons_Click(y));
             }
+
+
+            //I tried all day to make this into a loop that works and I give up
+            alarmButtons[0].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 0); };
+            alarmButtons[1].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 1); };
+            alarmButtons[2].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 2); };
+            alarmButtons[3].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 3); };
+            alarmButtons[4].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 4); };
+            alarmButtons[5].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 5); };
+            alarmButtons[6].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 6); };
+            alarmButtons[7].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 7); };
+            alarmButtons[8].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 8); };
+            alarmButtons[9].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, 9); };
+
         }
 
         //Tick occurs once per second
@@ -107,16 +120,15 @@ namespace Clock
                 alarmPanels[newAlarmsSet].Top = panelTop;
                 panelTop = panelTop + 100;
 
-                alarmButtons[newAlarmsSet].Click += (sender2, EventArgs) => { AlarmButtons_Click(sender2, EventArgs, newAlarmsSet); };
 
                 newAlarmsSet++;
             }
         }
 
-        private void AlarmButtons_Click(object sender, EventArgs e, int test)
+        private void AlarmButtons_Click(object sender, EventArgs e, int z)
         {
-            MessageBox.Show(test.ToString());
-            //return 1;
+            MessageBox.Show(z.ToString());
+            alarmPanels[z].Visible = false;
         }
     }
 }
