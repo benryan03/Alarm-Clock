@@ -108,7 +108,7 @@ namespace Clock
 
             for (int y = 0; y < x; y++)
             {
-                if ((DateTime.Compare(alarms[y], currentTime) < 0) & alarmExpired[y] == false)
+                if ((DateTime.Compare(alarms[y], currentTime) < 0) & alarmExpired[y] == false & alarmPanels[y].Visible == true)
                 {
                     //Show notification
                     alarmExpired[y] = true;
@@ -163,6 +163,9 @@ namespace Clock
         {
             //Stop displaying that alarm
             alarmPanels[z].Visible = false;
+
+            //Reset that alarm
+            alarms[z] = DateTime.MaxValue;
 
             //Move the rest of the saved alarms up to fill the empty space
             panelTop = 200;
